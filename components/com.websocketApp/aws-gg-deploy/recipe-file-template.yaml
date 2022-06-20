@@ -1,0 +1,34 @@
+RecipeFormatVersion: '2020-01-25'
+ComponentName: '$component_name'
+ComponentVersion: '$component_version_number'
+ComponentDescription: 'A component that uploads file to the flask server via API and publish the json to S3'
+ComponentPublisher: 'Amazon Web Services'
+ComponentDependencies:
+  aws.greengrass.StreamManager:
+    VersionRequirement: "^2.0.0"
+ComponentConfiguration:
+  DefaultConfiguration:
+    Message: "websocket"
+    accessControl:
+      aws.greengrass.ipc.pubsub:
+        '$component_name:pubsub:1':
+          policyDescription: Allows access to subscribe to all topics.
+          operations:
+            - 'aws.greengrass#SubscribeToTopic'
+          resources:
+            - '*'
+Manifests:
+  - Platform:
+      os: linux
+    Lifecycle:
+      Install:
+        Script: pip3 install awsiotsdk python-socketio asyncio aiohttp urllib3 chardet
+        RequiresPrivilege: True
+      Run:
+        Script: python3 -u {artifacts:decompressedPath}/$artifacts_zip_file_name/$artifacts_entry_file
+    Artifacts:
+      - URI: $s3_path/$next_version/$artifacts_zip_file_name.zip
+        Unarchive: ZIP
+        Permission:
+          Read: ALL
+          Execute: ALL

@@ -1,0 +1,9 @@
+include LICENSE.txt
+include README.md
+include pyproject.toml
+include setup.cfg
+include setup.py
+include tox.ini
+
+global-exclude *.py[cod]
+global-exclude __pycache__

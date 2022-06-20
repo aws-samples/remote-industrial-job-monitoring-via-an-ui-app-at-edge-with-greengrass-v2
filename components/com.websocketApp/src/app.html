@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>python-socketio test</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function(){
+            var socket = io.connect();
+            console.log("socket",socket)
+            socket.on('connect', function() {
+                socket.emit('my_event', {data: 'I\'m connected!'});
+            });
+            socket.on('disconnect', function() {
+                //socket= io.connect();
+                $('#log').append('<br>Disconnected');
+            });
+            socket.on('my_response', function(msg) {
+                $('#log').append('<br>Received: ' + msg.data);
+            });
+            socket.on('ipc_response', function(msg) {
+                $('#log').append('<br>Received subscriber response: ' + msg.data);
+            });
+            // event handler for server sent data
+            // the data is displayed in the "Received" section of the page
+            // handlers for the different forms in the page
+            // these send data to the server in a variety of ways
+            $('form#emit').submit(function(event) {
+                socket.emit('my_event', {data: $('#emit_data').val()});
+                return false;
+            });
+            $('form#getdata').submit(function(event) {
+                socket.emit('publish_msg', {data: $('#publish_msg').val()});
+                return false;
+            });
+            $('form#disconnect').submit(function(event) {
+                socket.emit('disconnect_request');
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>python-socketio test</h1>
+    <h2>Send:</h2>
+    <form id="emit" method="POST" action='#'>
+        <input type="text" name="emit_data" id="emit_data" placeholder="Message">
+        <input type="submit" value="Echo">
+    </form>
+    </form>
+    <form id="getdata" method="GET" action='#'>
+        <input type="submit" value="Get Pub Data">
+    </form>
+    <form id="disconnect" method="POST" action="#">
+        <input type="submit" value="Disconnect">
+    </form>
+    <h2>Receive:</h2>
+    <div><p id="log"></p></div>
+</body>
+</html>

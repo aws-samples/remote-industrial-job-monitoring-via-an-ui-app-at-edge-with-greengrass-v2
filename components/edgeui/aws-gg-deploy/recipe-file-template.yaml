@@ -1,0 +1,24 @@
+RecipeFormatVersion: '2020-01-25'
+ComponentName: '$component_name'
+ComponentVersion: '$component_version_number'
+ComponentDescription: 'Component that post data from config file to webUI'
+ComponentPublisher: 'Amazon Web Services'
+ComponentConfiguration:
+  DefaultConfiguration:
+    Message: "com.edgeui"
+Manifests:
+  - Platform:
+      os: linux
+    Lifecycle:
+      Install:
+        Script:  apt-get update && apt-get install -y nodejs  && apt-get install npm -y && npm install -g yarn  && cp -r {artifacts:decompressedPath}/* {work:path} &&  yarn --cwd {work:path}/edgeui/edgeui install && export NODE_PATH=$NODE_PATH:{work:path}/edgeui/edgeui/node_modules &&  hostname -I > {work:path}/edgeui/edgeui/ipAddress.txt && chmod 777 {work:path}/edgeui/edgeui/ipAddress.txt
+        RequiresPrivilege: True
+      Run:
+        Script: yarn --cwd {work:path}/edgeui/edgeui start  #--cwd {artifacts:decompressedPath}/GyrodataRig/GyrodataRig start
+        RequiresPrivilege: True
+    Artifacts:
+      - URI: $s3_path/$next_version/$artifacts_zip_file_name.zip
+        Unarchive: ZIP
+        Permission:
+          Read: ALL
+          Execute: ALL
