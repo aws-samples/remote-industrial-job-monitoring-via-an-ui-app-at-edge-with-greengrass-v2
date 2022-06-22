@@ -25,7 +25,7 @@ Manifests:
         Script: pip3 install awsiotsdk python-socketio asyncio aiohttp urllib3 chardet
         RequiresPrivilege: True
       Run:
-        Script: python3 -u {artifacts:decompressedPath}/$artifacts_zip_file_name/$artifacts_entry_file
+        Script: python3 -u {artifacts:decompressedPath}/$artifacts_zip_file_name/$artifacts_entry_file -b="Replace with your S3 bucket name"
     Artifacts:
       - URI: $s3_path/$next_version/$artifacts_zip_file_name.zip
         Unarchive: ZIP

@@ -1,0 +1,24 @@
+{
+	"Version information" : {
+		"VERSION 1.0": 1.0,
+		"ACT CODE" : "6547 2984 2890 9783"
+	},
+	"Wind Turbine Information Block" : {
+		"LONGITUDE" : 2.958784,
+		"LATITUDE" : 56.982761,
+		"TURBINE NAME" : "TensorIoT New Integrator",
+		"JOB NUMBER" : "FA1021QGWD123",
+		"START DEPTH": 2040.0264,
+		"UNIQUE TURBINE IDENTIFIER": "/1/3-K-2",
+		"NORTH REFERENCE" : true,
+		"TURBINE TYPE" : "Platform",
+		"TURBINE SIZE" :"Medium"
+	},
+        "LOCATION" : "Norway",
+	"SUPPORT" : "RMC-1",
+	"Parameter Information Block":{
+		"BATTERY CHARGE" : 25,
+		"OUTRUN MEMORY MODE ACTIVATED" : "ENABLE",
+		"SHUTDOWN TIME" : 15
+	}
+}
