@@ -29,7 +29,7 @@ Manifests:
         Script: python3 -m pip install --upgrade pip && pip3 install awsiotsdk flask flask-cors boto3 cbor2 setuptools && pip3 install -e {artifacts:decompressedPath}/jobdata/jobdata/.
         RequiresPrivilege: True
       Run:
-        Script: python3 -u {artifacts:decompressedPath}/$artifacts_zip_file_name/$artifacts_entry_file
+        Script: python3 -u {artifacts:decompressedPath}/$artifacts_zip_file_name/$artifacts_entry_file -b="Replace with your S3 bucket name"
     Artifacts:
       - URI: $s3_path/$next_version/$artifacts_zip_file_name.zip
         Unarchive: ZIP
