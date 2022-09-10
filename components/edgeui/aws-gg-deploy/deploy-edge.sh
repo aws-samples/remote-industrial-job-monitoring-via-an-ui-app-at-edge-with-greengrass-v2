@@ -10,13 +10,13 @@ _setEnv()
   DEV="dev"
   PRD="prd"
   DEV_IOT_THING_GROUP="MyGreengrassCoreGroup"
-  AWS_ACCOUNT_NUMBER="REPLACE-WITH-YOUR-OWN-ACCOUNT-NUMBER"
-  AWS_REGION="REPLACE-WITH-YOUR-OWN-REGION"
-  ROLE_ARN="REPLACE-WITH-YOUR-OWN-ROLE"
+  AWS_ACCOUNT_NUMBER="593512547852"
+  AWS_REGION="us-west-2"
+  ROLE_ARN="arn:aws:iam::593512547852:role/admin"
   NEXT_VERSION="1.0.0"
   COMPONENT_NAME="com.edgeui"
   CURRENT_VERSION_FILE="CURRENT_VERSION_FILE.txt"
-  S3_BUCKET="REPLACE-WITH-YOUR-OWN-S3"
+  S3_BUCKET="sagemaker-us-west-2-593512547852"
   S3_KEY="artifacts"
   S3_PATH="s3://${S3_BUCKET}/${S3_KEY}/${COMPONENT_NAME}"
   SRC_FOLDER="src"
@@ -217,8 +217,8 @@ _updateTheVersionInFileInS3()
 ###############################################################
 include_public_comps=true
 _setEnv
-_exportAWSCreds
-_installSigil
+#_exportAWSCreds
+#_installSigil
 _getCurrentVersion
 _getNextVersion ${CURRENT_VERSION_NUMBER} 2
 RECIPE_FILE_NAME="${COMPONENT_NAME}-${NEXT_VERSION}.yaml"
