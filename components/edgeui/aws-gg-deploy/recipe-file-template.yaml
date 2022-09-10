@@ -11,10 +11,10 @@ Manifests:
       os: linux
     Lifecycle:
       Install:
-        Script:  apt-get update && apt-get install -y nodejs  && apt-get install npm -y && npm install -g yarn  && cp -r {artifacts:decompressedPath}/* {work:path} &&  yarn --cwd {work:path}/edgeui/edgeui install && export NODE_PATH=$NODE_PATH:{work:path}/edgeui/edgeui/node_modules &&  hostname -I > {work:path}/edgeui/edgeui/ipAddress.txt && chmod 777 {work:path}/edgeui/edgeui/ipAddress.txt
+        Script:  apt-get update && apt-get install -y nodejs && apt-get install npm -y && npm install -g yarn  && cp -r {artifacts:decompressedPath}/* {work:path} &&  yarn --cwd {work:path}/edgeui/edgeui install && export NODE_PATH=$NODE_PATH:{work:path}/edgeui/edgeui/node_modules &&  hostname -I > {work:path}/edgeui/edgeui/ipAddress.txt && chmod 777 {work:path}/edgeui/edgeui/ipAddress.txt
         RequiresPrivilege: True
       Run:
-        Script: yarn --cwd {work:path}/edgeui/edgeui start  #--cwd {artifacts:decompressedPath}/GyrodataRig/GyrodataRig start
+        Script: yarn --cwd {work:path}/edgeui/edgeui start  
         RequiresPrivilege: True
     Artifacts:
       - URI: $s3_path/$next_version/$artifacts_zip_file_name.zip
