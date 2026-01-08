@@ -1,5 +1,5 @@
 boto3
 flask
 flask_sqlalchemy
-werkzeug==2.0.0
+werkzeug==3.1.5
 cbor2~=5.4.2
